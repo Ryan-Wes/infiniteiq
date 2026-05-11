@@ -29,6 +29,15 @@ app.add_middleware(
 @app.on_event("startup")
 def startup():
     init_db()
+    # Gera KB automaticamente se não existir (necessário após cold start no Render)
+    try:
+        import chromadb
+        chroma = chromadb.PersistentClient(path="./chroma_db")
+        chroma.get_collection("infiniteiq_kb")
+        print("KB já existe, pulando setup.")
+    except Exception:
+        print("KB não encontrada, gerando embeddings...")
+        setup_kb()
 
 
 # ── Reviews ──────────────────────────────────────────────

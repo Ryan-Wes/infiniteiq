@@ -94,13 +94,46 @@
 
 ---
 
-## Dia 3 — (pendente)
+## Dia 3 — Agente com RAG e raciocínio visível
 
----
+**Objetivo:** agente respondendo com base na KB, raciocínio visível no frontend.
 
-## Dia 4 — (pendente)
+### O que foi feito
 
-## Dia 3 — (pendente)
+- `kb.json` com 21 tópicos da documentação pública do InfinitePay
+- `kb_setup.py` gerando embeddings (`text-embedding-3-small`) e populando ChromaDB
+- `agent.py` com pipeline de 4 passos:
+  1. Classificação da mensagem (categoria + confiança via gpt-4o-mini)
+  2. Busca semântica na KB (ChromaDB, top 3 chunks por similaridade)
+  3. Decisão: similaridade ≥ 40% e confiança ≥ 65% → resolve; senão → escala
+  4. Geração de resposta com contexto da KB ou mensagem de escalação
+- `POST /agent/chat` e `POST /kb/setup` adicionados ao `main.py`
+- Página `Agent.jsx` com chat, sidebar de sugestões, painel de raciocínio expansível e badges verde/vermelho
+
+### Testes realizados
+
+| Mensagem | Comportamento |
+|---|---|
+| "n consigo enviar um pix" | Resolvido — similaridade 56%, resposta correta sobre Pix |
+| "o app fica fechando sozinho" | Resolvido — similaridade 67%, solução de cache/reinstalação |
+| "como contestar cobrança indevida" | Resolvido — similaridade 78%, resposta completa |
+| "qual o limite de saque diário" | Resolvido — similaridade 68%, limites detalhados |
+| "qual o resultado do jogo ontem" | Escalado — similaridade 24% (abaixo do threshold) ✅ |
+| "o app do nubank é melhor?" | Resolvido com resposta neutra (não tem info sobre Nubank) |
+
+### Problemas encontrados e soluções
+
+| Problema | Causa | Solução |
+|---|---|---|
+| `chromadb` não instalava no Dia 1 | Faltava C++ Build Tools | Versão mais recente do ChromaDB tem wheels pré-compiladas — instalou sem problemas |
+| `KeyError: OPENAI_API_KEY` no kb_setup | `client` instanciado antes do `load_dotenv()` | Movido `load_dotenv()` para o topo do arquivo |
+| `JSONDecodeError` no classifier do agente | OpenAI retornava JSON com markdown (` ```json ``` `) | Adicionado `parse_json()` que strip markdown antes de parsear |
+
+### Decisões técnicas
+
+- **ChromaDB embedded:** roda no mesmo processo do FastAPI, sem servidor separado. Arquivos salvos em `./chroma_db/`. Em produção, os arquivos não persistem entre deploys no Render free tier — solução pendente para o Dia 4.
+- **Thresholds de decisão:** similaridade 0.40 e confiança 0.65 — calibrados nos testes para equilibrar cobertura e precisão.
+- **Painel de raciocínio:** elemento diferenciador do projeto — prova que é um agente com etapas de raciocínio, não apenas um chatbot.
 
 ---
 
