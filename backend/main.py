@@ -6,10 +6,13 @@ load_dotenv()
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
-from database import init_db, save_review, get_stats, clear_reviews
+from database import init_db, save_review, get_stats, clear_reviews, save_conversation
 from scraper import fetch_reviews
 from classifier import classify_batch
+from agent import run_agent
+from kb_setup import setup_kb
 
 BATCH_SIZE = 20
 
@@ -28,8 +31,9 @@ def startup():
     init_db()
 
 
+# ── Reviews ──────────────────────────────────────────────
+
 def process_batch(batch: list[dict]) -> list[tuple]:
-    """Classifica um lote e retorna pares (review, classificação)."""
     classifications = classify_batch([r["content"] for r in batch])
     return list(zip(batch, classifications))
 
@@ -39,11 +43,7 @@ def scrape_reviews(count: int = 100, reset: bool = False):
     if reset:
         clear_reviews()
     raw = fetch_reviews(count)
-
-    # Divide em lotes
     batches = [raw[i: i + BATCH_SIZE] for i in range(0, len(raw), BATCH_SIZE)]
-
-    # Processa todos os lotes em paralelo
     results = []
     with ThreadPoolExecutor(max_workers=len(batches)) as executor:
         futures = {executor.submit(process_batch, b): b for b in batches}
@@ -52,8 +52,6 @@ def scrape_reviews(count: int = 100, reset: bool = False):
                 results.extend(future.result())
             except Exception:
                 continue
-
-    # Salva no banco
     saved = 0
     for review, cls in results:
         try:
@@ -68,10 +66,34 @@ def scrape_reviews(count: int = 100, reset: bool = False):
             saved += 1
         except Exception:
             continue
-
     return {"scraped": len(raw), "saved": saved}
 
 
 @app.get("/reviews/stats")
 def reviews_stats():
     return get_stats()
+
+
+# ── Knowledge Base ────────────────────────────────────────
+
+@app.post("/kb/setup")
+def kb_setup():
+    setup_kb()
+    return {"status": "KB populada com sucesso"}
+
+
+# ── Agent ─────────────────────────────────────────────────
+
+class ChatRequest(BaseModel):
+    message: str
+
+
+@app.post("/agent/chat")
+def agent_chat(body: ChatRequest):
+    result = run_agent(body.message)
+    save_conversation(
+        message=body.message,
+        response=result["response"],
+        escalated=result["escalate"],
+    )
+    return result
