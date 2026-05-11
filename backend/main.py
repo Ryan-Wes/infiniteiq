@@ -7,7 +7,7 @@ load_dotenv()
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from database import init_db, save_review, get_stats
+from database import init_db, save_review, get_stats, clear_reviews
 from scraper import fetch_reviews
 from classifier import classify_batch
 
@@ -35,7 +35,9 @@ def process_batch(batch: list[dict]) -> list[tuple]:
 
 
 @app.post("/reviews/scrape")
-def scrape_reviews(count: int = 100):
+def scrape_reviews(count: int = 100, reset: bool = False):
+    if reset:
+        clear_reviews()
     raw = fetch_reviews(count)
 
     # Divide em lotes

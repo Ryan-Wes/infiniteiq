@@ -1,17 +1,20 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #0f1117;
-  --surface: #1a1d27;
-  --surface2: #22263a;
-  --border: #2e3250;
-  --accent: #6c63ff;
-  --accent2: #00d4aa;
-  --text: #e8eaf6;
-  --muted: #8b90a7;
+  /* InfinitePay brand — gradiente amarelo → verde limão */
+  --bg: #0a0a0a;
+  --surface: #121212;
+  --surface2: #1a1a1a;
+  --border: #252525;
+  --accent: #39e75f;
+  --accent-dark: #25c247;
+  --accent2: #c8ff00;
+  --accent-gradient: linear-gradient(135deg, #c8ff00, #39e75f);
+  --text: #e8f0e8;
+  --muted: #7a9080;
   --neg: #ff5c7a;
-  --pos: #00d4aa;
-  --neu: #ffc94d;
+  --pos: #39e75f;
+  --neu: #c8ff00;
 }
 
 body {
@@ -27,4 +30,23 @@ button {
   cursor: pointer;
   border: none;
   font-family: inherit;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
 }

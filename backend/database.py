@@ -40,6 +40,11 @@ def get_conn():
         conn.close()
 
 
+def clear_reviews():
+    with get_conn() as conn:
+        conn.execute("DELETE FROM reviews")
+
+
 def save_review(review_id: str, author: str, score: int, content: str, category: str, sentiment: str):
     with get_conn() as conn:
         conn.execute(

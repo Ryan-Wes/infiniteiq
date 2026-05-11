@@ -15,7 +15,7 @@ export default function Hero() {
     <div style={s.page}>
       {/* NAV */}
       <nav style={s.nav}>
-        <span style={s.logo}>Infinite<span style={{ color: "var(--accent)" }}>IQ</span></span>
+        <span style={s.logo}>Infinite<span style={{ background: "var(--accent-gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>IQ</span></span>
         <div style={s.navLinks}>
           <button style={s.navBtn} onClick={() => nav("/dashboard")}>Dashboard</button>
           <button style={s.navBtn} onClick={() => nav("/agent")}>Agente</button>
@@ -27,7 +27,7 @@ export default function Hero() {
         <div style={s.badge}>Case Study · CloudWalk / InfinitePay</div>
         <h1 style={s.title}>
           Inteligência de suporte<br />
-          <span style={{ color: "var(--accent)" }}>construída com dados reais</span>
+          <span style={{ background: "var(--accent-gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>construída com dados reais</span>
         </h1>
         <p style={s.subtitle}>
           Analisei centenas de reviews reais do InfinitePay no Google Play,
@@ -108,8 +108,8 @@ const s = {
   subtitle: { color: "var(--muted)", fontSize: "1.1rem", marginBottom: "2.5rem", lineHeight: 1.7 },
   ctaRow: { display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" },
   ctaPrimary: {
-    background: "var(--accent)", color: "#fff", padding: "0.8rem 2rem",
-    borderRadius: "8px", fontWeight: 600, fontSize: "1rem",
+    background: "var(--accent-gradient)", color: "#0d1117", padding: "0.8rem 2rem",
+    borderRadius: "8px", fontWeight: 700, fontSize: "1rem",
   },
   ctaSecondary: {
     background: "var(--surface2)", color: "var(--text)", padding: "0.8rem 2rem",
@@ -130,9 +130,9 @@ const s = {
     background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "12px", padding: "1.8rem",
   },
   stepNum: {
-    width: 36, height: 36, borderRadius: "50%", background: "var(--accent)",
+    width: 36, height: 36, borderRadius: "50%", background: "var(--accent-gradient)",
     display: "flex", alignItems: "center", justifyContent: "center",
-    fontWeight: 700, marginBottom: "1rem",
+    fontWeight: 700, marginBottom: "1rem", color: "#0d1117",
   },
   stepTitle: { fontSize: "1.1rem", fontWeight: 700, marginBottom: "0.5rem" },
   stepDesc: { color: "var(--muted)", fontSize: "0.9rem", lineHeight: 1.6 },
