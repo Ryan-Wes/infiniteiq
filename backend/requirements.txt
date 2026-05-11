@@ -1,0 +1,6 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+openai>=2.0.0
+google-play-scraper==1.2.7
+# chromadb — instalar no Dia 3 (requer C++ Build Tools no Windows)
+python-dotenv==1.0.1
