@@ -47,7 +47,7 @@ export default function Dashboard() {
 
   const handleScrape = async () => {
     setScraping(true);
-    await axios.post(`${API}/reviews/scrape?count=200`);
+    await axios.post(`${API}/reviews/scrape?count=100`);
     setScraping(false);
     load();
   };

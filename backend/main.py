@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 load_dotenv()
 
@@ -27,29 +28,42 @@ def startup():
     init_db()
 
 
-@app.post("/reviews/scrape")
-def scrape_reviews(count: int = 200):
-    raw = fetch_reviews(count)
-    saved = 0
+def process_batch(batch: list[dict]) -> list[tuple]:
+    """Classifica um lote e retorna pares (review, classificação)."""
+    classifications = classify_batch([r["content"] for r in batch])
+    return list(zip(batch, classifications))
 
-    # Processa em lotes de BATCH_SIZE (200 reviews = ~10 chamadas à OpenAI)
-    for i in range(0, len(raw), BATCH_SIZE):
-        batch = raw[i : i + BATCH_SIZE]
+
+@app.post("/reviews/scrape")
+def scrape_reviews(count: int = 100):
+    raw = fetch_reviews(count)
+
+    # Divide em lotes
+    batches = [raw[i: i + BATCH_SIZE] for i in range(0, len(raw), BATCH_SIZE)]
+
+    # Processa todos os lotes em paralelo
+    results = []
+    with ThreadPoolExecutor(max_workers=len(batches)) as executor:
+        futures = {executor.submit(process_batch, b): b for b in batches}
+        for future in as_completed(futures):
+            try:
+                results.extend(future.result())
+            except Exception:
+                continue
+
+    # Salva no banco
+    saved = 0
+    for review, cls in results:
         try:
-            classifications = classify_batch([r["content"] for r in batch])
-            for r, cls in zip(batch, classifications):
-                try:
-                    save_review(
-                        review_id=r["review_id"],
-                        author=r["author"],
-                        score=r["score"],
-                        content=r["content"],
-                        category=cls["category"],
-                        sentiment=cls["sentiment"],
-                    )
-                    saved += 1
-                except Exception:
-                    continue
+            save_review(
+                review_id=review["review_id"],
+                author=review["author"],
+                score=review["score"],
+                content=review["content"],
+                category=cls["category"],
+                sentiment=cls["sentiment"],
+            )
+            saved += 1
         except Exception:
             continue
 
