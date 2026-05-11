@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 import httpx
 from openai import OpenAI
 
@@ -13,31 +14,49 @@ else:
 
 CATEGORIES = ["saque", "cobrança indevida", "cadastro", "maquininha", "atendimento", "outros"]
 
-SYSTEM_PROMPT = """Você é um classificador de reviews do app InfinitePay.
-Dado o texto de um review, retorne EXATAMENTE um JSON com dois campos:
+BATCH_SYSTEM_PROMPT = """Você é um classificador de reviews do app InfinitePay.
+Receberá uma lista de reviews numerados. Para cada um, retorne um JSON array com objetos contendo:
 - "category": uma das opções: saque, cobrança indevida, cadastro, maquininha, atendimento, outros
 - "sentiment": uma das opções: positive, negative, neutral
 
-Responda APENAS com o JSON, sem markdown, sem explicação."""
+Responda APENAS com o JSON array, sem markdown, sem explicação.
+Exemplo: [{"category":"saque","sentiment":"negative"},{"category":"outros","sentiment":"positive"}]"""
 
 
-def classify(content: str) -> dict:
+def classify_batch(reviews: list[str]) -> list[dict]:
+    """Classifica uma lista de reviews em uma única chamada à OpenAI."""
+    numbered = "\n".join(f"{i+1}. {r[:300]}" for i, r in enumerate(reviews))
+
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": content[:500]},
+            {"role": "system", "content": BATCH_SYSTEM_PROMPT},
+            {"role": "user", "content": numbered},
         ],
         temperature=0,
-        max_tokens=60,
+        max_tokens=len(reviews) * 30,
     )
-    import json
+
     text = response.choices[0].message.content.strip()
-    result = json.loads(text)
-    category = result.get("category", "outros")
-    sentiment = result.get("sentiment", "neutral")
-    if category not in CATEGORIES:
-        category = "outros"
-    if sentiment not in ("positive", "negative", "neutral"):
-        sentiment = "neutral"
-    return {"category": category, "sentiment": sentiment}
+    results = json.loads(text)
+
+    output = []
+    for r in results:
+        category = r.get("category", "outros")
+        sentiment = r.get("sentiment", "neutral")
+        if category not in CATEGORIES:
+            category = "outros"
+        if sentiment not in ("positive", "negative", "neutral"):
+            sentiment = "neutral"
+        output.append({"category": category, "sentiment": sentiment})
+
+    # Garante que retorna o mesmo número de itens da entrada
+    while len(output) < len(reviews):
+        output.append({"category": "outros", "sentiment": "neutral"})
+
+    return output
+
+
+def classify(content: str) -> dict:
+    """Classifica um único review (mantido para compatibilidade)."""
+    return classify_batch([content])[0]
