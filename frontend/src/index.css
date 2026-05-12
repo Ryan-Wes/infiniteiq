@@ -32,6 +32,46 @@ button {
   font-family: inherit;
 }
 
+/* ── GLOBAL SHARED ── */
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.logo-accent {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.nav-btn {
+  background: transparent;
+  color: var(--muted);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  transition: color .25s ease, border-color .25s ease;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-btn:hover {
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.nav-btn.active {
+  color: var(--accent);
+}
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
