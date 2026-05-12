@@ -128,7 +128,7 @@
 
 .bubble.user {
   background: var(--accent-gradient);
-  color: #fff;
+  color: #0a0a0a;
   font-weight: 500;
   border-bottom-right-radius: 2px;
 }
