@@ -4,6 +4,8 @@
 
 **Live demo:** [infiniteiq.vercel.app](https://infiniteiq.vercel.app)
 
+![InfiniteIQ preview](assets/preview.gif)
+
 ---
 
 ## What is this?
