@@ -14,7 +14,7 @@ else:
 CHROMA_PATH = "./chroma_db"
 COLLECTION_NAME = "infiniteiq_kb"
 
-CATEGORIES = ["saque", "cobrança indevida", "cadastro", "maquininha", "atendimento", "outros"]
+CATEGORIES = ["app", "maquininha", "conta", "recebimento", "cobrança", "atendimento", "outros"]
 
 SIMILARITY_THRESHOLD = 0.40
 CONFIDENCE_THRESHOLD = 0.65

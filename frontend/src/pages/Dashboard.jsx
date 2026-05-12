@@ -7,10 +7,11 @@ import "../css/dashboard.css";
 const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const CATEGORY_LABELS = {
-  "saque": "Saque",
-  "cobrança indevida": "Cobrança Indevida",
-  "cadastro": "Cadastro",
+  "app": "App",
   "maquininha": "Maquininha",
+  "conta": "Conta",
+  "recebimento": "Recebimento",
+  "cobrança": "Cobrança",
   "atendimento": "Atendimento",
   "outros": "Outros",
 };
@@ -24,12 +25,96 @@ const SCRAPE_MESSAGES = [
   "Quase lá...",
 ];
 
-function sentimentLabel(avg) {
-  if (avg >= 0.4) return { label: "Positivo", color: "var(--pos)" };
-  if (avg <= -0.4) return { label: "Negativo", color: "var(--neg)" };
-  return { label: "Neutro", color: "var(--neu)" };
+// ── MODAL ──
+function ReviewModal({ review, category, onClose }) {
+  useEffect(() => {
+    const handler = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
+
+  if (!review) return null;
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-card" onClick={e => e.stopPropagation()}>
+        <div className="modal-header">
+          <span className="modal-author">{review.author}</span>
+          <button className="modal-close" onClick={onClose}>×</button>
+        </div>
+        <span className="modal-stars">{"⭐".repeat(review.score)}</span>
+        <p className="modal-text">"{review.content}"</p>
+        <div className="modal-footer">
+          <span className="modal-tag">{CATEGORY_LABELS[category] || category}</span>
+          <span className="modal-tag">
+            {review.sentiment === "negative" ? "😤 Negativo" : review.sentiment === "positive" ? "😊 Positivo" : "😐 Neutro"}
+          </span>
+          <span className="modal-tag" style={{ marginLeft: "auto", fontSize: "0.7rem", opacity: 0.5 }}>ESC para fechar</span>
+        </div>
+      </div>
+    </div>
+  );
 }
 
+// ── CATEGORY CARD ──
+function CategoryCard({ cat, color, samples, onSelectReview }) {
+  const allNeg = samples?.negative || [];
+  const allPos = samples?.positive || [];
+  const allNeu = samples?.neutral || [];
+
+  const tabs = [
+    { key: "negative", label: `😤 ${allNeg.length}`, list: allNeg, activeClass: "active-neg" },
+    { key: "positive", label: `😊 ${allPos.length}`, list: allPos, activeClass: "active-pos" },
+    ...(allNeu.length > 0 ? [{ key: "neutral", label: `😐 ${allNeu.length}`, list: allNeu, activeClass: "active-neu" }] : []),
+  ].filter(t => t.list.length > 0);
+
+  const [activeTab, setActiveTab] = useState(tabs[0]?.key || "negative");
+  const [expanded, setExpanded] = useState(false);
+
+  const currentList = tabs.find(t => t.key === activeTab)?.list || [];
+  const visible = expanded ? currentList : currentList.slice(0, 2);
+
+  return (
+    <div className="category-card">
+      <div className="category-header">
+        <div className="category-dot" style={{ background: color }} />
+        <span className="category-name">{CATEGORY_LABELS[cat.category] || cat.category}</span>
+        <span className="category-count">{cat.count} avaliações</span>
+      </div>
+
+      <div className="sentiment-tabs">
+        {tabs.map(t => (
+          <button
+            key={t.key}
+            className={`sentiment-tab ${activeTab === t.key ? t.activeClass : ""}`}
+            onClick={() => { setActiveTab(t.key); setExpanded(false); }}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="review-samples">
+        {visible.map((r, j) => (
+          <div key={j} className="review-sample" onClick={() => onSelectReview(r, cat.category)}>
+            <div className="review-meta">
+              <span className="review-author">{r.author}</span>
+              <span className="review-stars">{"⭐".repeat(r.score)}</span>
+            </div>
+            <p className="review-text">"{r.content.slice(0, 120)}{r.content.length > 120 ? "..." : ""}"</p>
+          </div>
+        ))}
+      </div>
+
+      {currentList.length > 2 && (
+        <button className="show-more-btn" onClick={() => setExpanded(e => !e)}>
+          {expanded ? "Ver menos ▲" : `Ver todos (${currentList.length}) ▼`}
+        </button>
+      )}
+    </div>
+  );
+}
+
+// ── OVERLAY ──
 function ScrapeOverlay() {
   const [msgIdx, setMsgIdx] = useState(0);
   useEffect(() => {
@@ -53,10 +138,12 @@ function ScrapeOverlay() {
   );
 }
 
+// ── MAIN ──
 export default function Dashboard() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [scraping, setScraping] = useState(false);
+  const [modalReview, setModalReview] = useState(null);
   const nav = useNavigate();
 
   const load = () => {
@@ -83,6 +170,13 @@ export default function Dashboard() {
   return (
     <div className="dash-page">
       {scraping && <ScrapeOverlay />}
+      {modalReview && (
+        <ReviewModal
+          review={modalReview.review}
+          category={modalReview.category}
+          onClose={() => setModalReview(null)}
+        />
+      )}
 
       <nav className="dash-nav">
         <span className="logo" onClick={() => nav("/")} style={{ cursor: "pointer" }}>
@@ -169,36 +263,15 @@ export default function Dashboard() {
             </div>
 
             <div className="category-grid">
-              {stats?.categories?.map((cat, i) => {
-                const sent = sentimentLabel(cat.avg_sentiment);
-                const samples = stats?.samples?.[cat.category] || [];
-                return (
-                  <div key={cat.category} className="category-card">
-                    <div className="category-header">
-                      <div className="category-dot" style={{ background: BAR_COLORS[i % BAR_COLORS.length] }} />
-                      <span className="category-name">{CATEGORY_LABELS[cat.category] || cat.category}</span>
-                      <span className="category-count">{cat.count} avaliações</span>
-                    </div>
-                    <span
-                      className="sentiment-badge"
-                      style={{ background: sent.color + "22", color: sent.color }}
-                    >
-                      {sent.label}
-                    </span>
-                    <div className="review-samples">
-                      {samples.slice(0, 2).map((r, j) => (
-                        <div key={j} className="review-sample">
-                          <div className="review-meta">
-                            <span className="review-author">{r.author}</span>
-                            <span className="review-stars">{"⭐".repeat(r.score)}</span>
-                          </div>
-                          <p className="review-text">"{r.content.slice(0, 120)}{r.content.length > 120 ? "..." : ""}"</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
+              {stats?.categories?.map((cat, i) => (
+                <CategoryCard
+                  key={cat.category}
+                  cat={cat}
+                  color={BAR_COLORS[i % BAR_COLORS.length]}
+                  samples={stats?.samples?.[cat.category]}
+                  onSelectReview={(r, c) => setModalReview({ review: r, category: c })}
+                />
+              ))}
             </div>
           </>
         )}

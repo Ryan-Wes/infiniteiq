@@ -70,10 +70,16 @@ def get_stats():
         for row in categories:
             cat = row["category"]
             rows = conn.execute(
-                "SELECT author, score, content, sentiment FROM reviews WHERE category = ? LIMIT 3",
+                """SELECT author, score, content, sentiment FROM reviews
+                   WHERE category = ? ORDER BY score ASC""",
                 (cat,),
             ).fetchall()
-            samples[cat] = [dict(r) for r in rows]
+            all_reviews = [dict(r) for r in rows]
+            samples[cat] = {
+                "negative": [r for r in all_reviews if r["sentiment"] == "negative"],
+                "positive": [r for r in all_reviews if r["sentiment"] == "positive"],
+                "neutral":  [r for r in all_reviews if r["sentiment"] == "neutral"],
+            }
 
         total_convs = conn.execute("SELECT COUNT(*) as n FROM conversations").fetchone()["n"]
         resolved = conn.execute("SELECT COUNT(*) as n FROM conversations WHERE escalated = 0").fetchone()["n"]

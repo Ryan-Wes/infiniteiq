@@ -12,20 +12,57 @@ if sys.platform == "win32":
 else:
     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
-CATEGORIES = ["saque", "cobrança indevida", "cadastro", "maquininha", "atendimento", "outros"]
+CATEGORIES = ["app", "maquininha", "conta", "recebimento", "cobrança", "atendimento", "outros"]
 
-BATCH_SYSTEM_PROMPT = """Você é um classificador de reviews do app InfinitePay.
-Receberá uma lista de reviews numerados. Para cada um, retorne um JSON array com objetos contendo:
-- "category": uma das opções: saque, cobrança indevida, cadastro, maquininha, atendimento, outros
-- "sentiment": uma das opções: positive, negative, neutral
+BATCH_SYSTEM_PROMPT = """Você classifica reviews do app InfinitePay no Google Play.
 
-Responda APENAS com o JSON array, sem markdown, sem explicação.
-Exemplo: [{"category":"saque","sentiment":"negative"},{"category":"outros","sentiment":"positive"}]"""
+CATEGORIAS — use o PRINCIPAL problema do review:
+
+"app" → problemas com o aplicativo em si:
+  - trava, fecha sozinho, lento, não abre, bug, UX ruim, tela preta
+  - ex: "o app trava toda hora", "fica fechando", "interface confusa"
+
+"maquininha" → problemas com o APARELHO FÍSICO de pagamento:
+  - maquininha não liga, não aceita cartão, problema de hardware
+  - ex: "a maquininha não funciona", "aparelho com defeito"
+
+"conta" → problemas de acesso ou bloqueio de conta:
+  - conta bloqueada, suspensa, sem acesso, verificação de identidade, login
+  - ex: "bloquearam minha conta", "não consigo entrar", "pediram documentos"
+
+"recebimento" → dinheiro não chegou ou foi retido:
+  - valor não caiu, prazo errado, saque bloqueado, antecipação com problema
+  - dinheiro transferido sem autorização, recebíveis retidos
+  - ex: "meu dinheiro não caiu", "valor retido sem motivo", "não consigo sacar"
+
+"cobrança" → valor cobrado ou debitado incorretamente:
+  - taxa cobrada errada, desconto indevido, cobrança inesperada
+  - NÃO inclui apenas reclamação de "taxa cara" — isso é "outros"
+  - ex: "cobraram taxa que não era pra cobrar", "debitaram valor errado"
+
+"atendimento" → suporte ruim ou inexistente:
+  - não respondem, demora, só robô, atendimento péssimo
+  - ex: "suporte não resolve nada", "impossível falar com humano"
+
+"outros" → não se encaixa acima:
+  - elogio geral, taxa cara sem erro, sugestão de melhoria, link de pagamento com UX ruim
+  - ex: "taxa muito cara", "poderia ter mais funções", "app bom mas taxas altas"
+
+SENTIMENT — tom GERAL do review:
+  "negative" → frustração ou reclamação dominante, mesmo que comece com elogio
+  "positive" → satisfação geral
+  "neutral" → sugestão neutra sem reclamação forte
+
+Nota 1-2 estrelas → quase sempre "negative".
+Começa bem mas termina em reclamação → "negative".
+
+Responda APENAS com JSON array, sem markdown.
+Exemplo: [{"category":"app","sentiment":"negative"},{"category":"outros","sentiment":"positive"}]"""
 
 
 def classify_batch(reviews: list[str]) -> list[dict]:
     """Classifica uma lista de reviews em uma única chamada à OpenAI."""
-    numbered = "\n".join(f"{i+1}. {r[:300]}" for i, r in enumerate(reviews))
+    numbered = "\n".join(f"{i+1}. {r[:600]}" for i, r in enumerate(reviews))
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",

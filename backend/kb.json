@@ -1,86 +1,86 @@
 [
   {
-    "topic": "limite de saque",
-    "content": "O limite diário de saque pelo InfinitePay varia conforme o perfil do cliente e o tempo de uso da conta. Para aumentar o limite, acesse Configurações > Limites e siga as instruções de validação de identidade. Saques Pix têm limite padrão de R$ 1.000 por transação no período noturno (20h às 6h) e R$ 10.000 durante o dia. Para saques acima desse valor, é necessário solicitar aumento de limite com antecedência de 24 horas."
+    "topic": "app travando ou fechando sozinho",
+    "content": "Se o app InfinitePay trava ou fecha sozinho: 1) Limpe o cache em Configurações do celular > Apps > InfinitePay > Limpar cache; 2) Atualize o app para a versão mais recente na loja; 3) Reinicie o dispositivo; 4) Libere espaço de armazenamento (mínimo 500MB livres); 5) Em Xiaomi e Samsung, verifique se o app tem permissão para rodar em segundo plano. Se nada funcionar, desinstale e reinstale. Problemas recorrentes podem ser reportados em Ajuda > Reportar problema."
   },
   {
-    "topic": "antecipação de recebíveis",
-    "content": "A antecipação de recebíveis permite receber o valor das vendas parceladas antes do prazo. A taxa de antecipação varia entre 1,99% e 3,99% ao mês dependendo do prazo e volume. Para solicitar, acesse Vendas > Antecipação no app. O valor é creditado em até 1 hora após a aprovação. Vendas feitas no crédito à vista já caem em 1 dia útil sem necessidade de antecipação."
+    "topic": "app lento ou com instabilidade",
+    "content": "Para melhorar o desempenho do app InfinitePay: 1) Certifique-se de ter Android 10 ou superior; 2) Feche outros apps em segundo plano; 3) Verifique sua conexão com internet; 4) Limpe o cache do app; 5) Desinstale e reinstale. Em caso de instabilidade generalizada, verifique status.infinitepay.io para ver se há manutenção em andamento. O InfinitePay tem SLA de 99,9% de disponibilidade."
+  },
+  {
+    "topic": "app não abre ou tela preta",
+    "content": "Se o app não abre ou mostra tela preta: 1) Force o fechamento e reabra; 2) Reinicie o dispositivo; 3) Verifique se o Android está atualizado; 4) Desinstale e reinstale o app. Se o problema persistir após reinstalar, entre em contato com o suporte em Ajuda > Falar com suporte informando o modelo do seu celular e versão do Android."
+  },
+  {
+    "topic": "maquininha física com problema",
+    "content": "Para problemas na maquininha física InfinitePay Smart: 1) Reinicie o aparelho segurando o botão de liga/desliga; 2) Verifique a conexão Wi-Fi ou sinal do chip 4G; 3) Certifique-se que a bateria está carregada (dura até 8h em uso contínuo); 4) Se a maquininha não aceita cartão, verifique se o leitor está limpo e sem obstrução. Para defeito de hardware confirmado, o suporte oferece troca em até 7 dias úteis."
   },
   {
     "topic": "conta bloqueada",
-    "content": "Contas podem ser bloqueadas por: movimentação atípica detectada pelo sistema antifraude, documentação pendente de validação, ou suspeita de uso inadequado (ex: vendas para familiares próximos). Para desbloquear, acesse o app e siga o passo a passo de verificação de identidade, ou entre em contato pelo chat do app em Ajuda > Falar com suporte. O prazo de análise é de 1 a 3 dias úteis após envio da documentação."
+    "content": "Contas podem ser bloqueadas por: movimentação atípica detectada pelo antifraude, documentação pendente, ou transações suspeitas (como vendas para familiares próximos). Para desbloquear: acesse o app e siga o passo a passo de verificação de identidade em Perfil > Verificação, ou acesse Ajuda > Falar com suporte. Prazo de análise: 1 a 3 dias úteis após envio da documentação. Em casos urgentes com dinheiro retido, mencione 'urgente' na abertura do chamado."
   },
   {
-    "topic": "cobrança indevida",
-    "content": "Para contestar uma cobrança indevida, acesse Extrato > selecione a transação > Contestar. Você tem até 30 dias para abrir uma contestação. O prazo de análise é de 5 a 10 dias úteis. Durante a análise, o valor fica retido. Se a contestação for aprovada, o estorno ocorre em até 2 dias úteis. Para cobranças de mensalidade ou tarifa inesperada, verifique o plano contratado em Configurações > Meu Plano."
+    "topic": "não consigo fazer login na conta",
+    "content": "Para problemas de acesso: 1) Tente redefinir a senha em 'Esqueci minha senha' na tela de login; 2) Verifique se está usando o CPF/e-mail correto; 3) Certifique-se de que seu número de celular está ativo para receber o SMS de verificação. Se o número foi trocado ou não tem acesso ao e-mail cadastrado, entre em contato com o suporte com documento de identidade para validação manual."
   },
   {
-    "topic": "maquininha travando",
-    "content": "Se o app InfiniteTap ou a maquininha estiver travando durante as vendas: 1) Force o fechamento do app e reabra; 2) Verifique se o app está atualizado na loja; 3) Reinicie o dispositivo; 4) Verifique se o NFC está ativado em Configurações do celular; 5) Certifique-se de que o Android é versão 10 ou superior. Se o problema persistir, tente desinstalar e reinstalar o app. Problemas recorrentes podem ser reportados em Ajuda > Reportar problema."
+    "topic": "verificação de identidade e documentos",
+    "content": "Se o cadastro está pendente de verificação: 1) Use fotos com boa iluminação e todos os dados legíveis; 2) A selfie deve mostrar seu rosto claramente, sem óculos ou boné; 3) Evite fotos de fotos ou documentos plastificados com reflexo. O prazo de análise é de até 24h em dias úteis. Se rejeitado, o app informa o motivo e você pode reenviar. CPF com restrição pode impedir a aprovação."
   },
   {
-    "topic": "app não abre ou fecha sozinho",
-    "content": "Se o app InfinitePay fecha sozinho ou não abre: 1) Limpe o cache do app em Configurações do celular > Apps > InfinitePay > Limpar cache; 2) Atualize o app para a versão mais recente; 3) Reinicie o dispositivo; 4) Libere espaço de armazenamento no celular (mínimo 500MB livres recomendado); 5) Em aparelhos Xiaomi/Samsung, verifique se o app tem permissão para rodar em segundo plano. Se nenhuma solução funcionar, desinstale e reinstale o app."
+    "topic": "dinheiro não caiu na conta",
+    "content": "Prazos de recebimento no InfinitePay: débito e Pix caem em até 1 hora; crédito à vista cai em 1 dia útil; crédito parcelado segue o calendário de parcelas. Se o valor está atrasado: 1) Verifique o extrato — se consta como 'concluído', o dinheiro foi enviado; 2) Aguarde até o fim do dia útil; 3) Se passou de 2 dias úteis, abra chamado no suporte com o número da transação. O 'InfiniteNitro' permite receber na hora com taxa adicional de 1,5% a 3,99%."
   },
   {
-    "topic": "cadastro bloqueado ou pendente",
-    "content": "O cadastro pode ficar pendente por: documentos com foto borrada ou cortada, selfie não reconhecida, ou CPF/CNPJ com restrição. Para resolver: acesse o app > Perfil > Verificação de identidade e reenvie os documentos conforme as instruções. Use boa iluminação e certifique-se que todos os dados estão legíveis. O prazo de análise é de até 24 horas em dias úteis. Se já foi aprovado e a conta foi bloqueada depois, o motivo é movimentação suspeita — veja 'conta bloqueada'."
+    "topic": "saque bloqueado ou limite de saque",
+    "content": "Limites de saque Pix: R$ 1.000 por transação no período noturno (20h às 6h) e R$ 10.000 durante o dia. Para aumentar: acesse Configurações > Limites e solicite com 24h de antecedência. Se o saque está bloqueado, pode ser por: saldo insuficiente, limite atingido, ou restrição de segurança na conta. Neste último caso, verifique se há pendências de verificação de identidade."
   },
   {
-    "topic": "link de pagamento não funciona",
-    "content": "Se o cliente não consegue pagar pelo link: 1) Verifique se o link não expirou — links têm validade de 30 dias por padrão; 2) Gere um novo link diretamente no app; 3) O cliente deve tentar outro cartão ou outra forma de pagamento; 4) Links de pagamento têm proteção antifraude que pode recusar cartões de familiares ou endereços suspeitos — isso é uma proteção de segurança; 5) Para vendas acima de R$2.000 via link, pode ser necessário confirmação adicional do comprador."
+    "topic": "antecipação de recebíveis",
+    "content": "A antecipação permite receber vendas parceladas antes do prazo. Taxa: 1,99% a 3,99% ao mês conforme prazo e volume. Para solicitar: acesse Vendas > Antecipação no app. Crédito em até 1 hora após aprovação. Se a antecipação foi negada, pode ser por: histórico de estornos alto, conta com restrição, ou volume insuficiente. O InfiniteNitro é a modalidade de antecipação automática — pode ser ativado em Configurações > Recebimento."
+  },
+  {
+    "topic": "valor retido ou dinheiro preso",
+    "content": "Valores podem ser retidos por: suspeita de fraude, venda contestada pelo comprador, ou contrato em aberto com outra instituição. Para verificar o motivo exato, acesse Extrato > selecione a transação > Ver detalhes. Se houver retenção indevida, abra chamado no suporte com o número da transação e o valor. Prazo de análise: 3 a 5 dias úteis. Em casos urgentes, mencione 'urgente' e o valor envolvido na abertura do chamado."
+  },
+  {
+    "topic": "cobrança ou taxa cobrada errada",
+    "content": "Para contestar uma cobrança indevida: acesse Extrato > selecione a transação > Contestar. Prazo para contestar: 30 dias. Análise: 5 a 10 dias úteis. Para cobranças de mensalidade inesperada, verifique seu plano em Configurações > Meu Plano. Se foi debitado um valor sem autorização, relate no suporte com print do extrato como evidência. O valor fica retido durante a análise e é devolvido se a contestação for aprovada."
+  },
+  {
+    "topic": "estorno de venda",
+    "content": "Para fazer estorno: acesse Vendas > selecione a venda > Estornar. Prazo: débito em até 24h; crédito pode levar 1 a 2 faturas para aparecer no cartão do cliente. Você tem até 180 dias para solicitar. O valor é descontado do seu saldo ou das próximas vendas. Se o saldo for insuficiente, o estorno fica pendente. Se o cliente contestou diretamente no banco (chargeback), o processo é diferente — entre em contato com o suporte."
+  },
+  {
+    "topic": "atendimento ruim ou sem resposta",
+    "content": "O suporte do InfinitePay está disponível pelo chat no app: Ajuda > Falar com suporte. Horário humano: segunda a sábado das 8h às 20h. Fora desse horário, o atendimento é por IA com retorno no próximo dia útil. Tempo médio de resposta: até 2 horas em horário comercial. Para casos urgentes (conta bloqueada, dinheiro retido), mencione 'urgente' no início da mensagem para priorização. Se não obtiver resposta em 48h, registre uma reclamação no Banco Central (BC) ou Procon."
+  },
+  {
+    "topic": "suporte demora ou não resolve",
+    "content": "Se o suporte não está resolvendo: 1) Reabra o chamado com mais detalhes e evidências (prints, números de transação); 2) Mencione 'urgente' se houver dinheiro retido; 3) Registre reclamação no Reclame Aqui — o InfinitePay costuma responder mais rápido lá; 4) Para casos graves, acesse o Banco Central pelo telefone 145 ou registre no portal consumidor.gov.br."
   },
   {
     "topic": "taxa de cartão e planos",
-    "content": "As taxas do InfinitePay variam por plano: Plano Gratuito: débito 0,75%, crédito à vista 2,69%, crédito parcelado a partir de 3,99%. Plano Smart (R$49,90/mês): taxas reduzidas a partir de 0,50% no débito. As taxas já incluem o custo de antecipação. Para comparar planos e simular taxas, acesse Configurações > Planos ou use a calculadora de taxas dentro do app."
+    "content": "Taxas do InfinitePay: Plano Gratuito: débito 0,75%, crédito à vista 2,69%, parcelado a partir de 3,99%. Plano Smart (R$ 49,90/mês): taxas reduzidas a partir de 0,50% no débito. Para comparar planos: acesse Configurações > Planos ou use a calculadora de taxas dentro do app. As taxas já incluem o custo de antecipação. Para negociar taxas, entre em contato com o suporte — clientes com alto volume têm condições especiais."
   },
   {
-    "topic": "Pix não chegou",
-    "content": "Se um Pix enviado não chegou ao destinatário: 1) Verifique o extrato — se consta como 'concluído' no seu app, o dinheiro foi enviado; 2) Peça ao destinatário para verificar o extrato no banco dele; 3) Transferências Pix são em tempo real mas podem ter delay de até 1 hora em casos de manutenção; 4) Se o status for 'pendente' por mais de 1 hora, entre em contato com o suporte. Para Pix recebidos, verifique se a chave cadastrada está correta em Pix > Minhas Chaves."
+    "topic": "Pix não chegou ou chave Pix",
+    "content": "Pix transferências são em tempo real mas podem ter delay de até 1 hora em manutenções. Se não chegou: 1) Verifique o extrato — se consta 'concluído', o dinheiro foi enviado; 2) Peça ao destinatário para verificar o extrato no banco dele. Para criar chave Pix: acesse Pix > Minhas Chaves > Cadastrar. Você pode ter até 5 chaves por CPF. Para portar uma chave de outro banco, selecione 'Portabilidade de chave' — processo leva até 7 dias úteis."
   },
   {
-    "topic": "criar chave Pix",
-    "content": "Para criar ou gerenciar chaves Pix no InfinitePay: acesse a aba Pix no app > Minhas Chaves > Cadastrar nova chave. Você pode cadastrar CPF/CNPJ, telefone, e-mail ou chave aleatória. Cada CPF pode ter até 5 chaves Pix em diferentes instituições. Se a chave já está cadastrada em outro banco, você precisa primeiro portá-la: selecione 'Portabilidade de chave' e siga as instruções — o processo leva até 7 dias úteis."
-  },
-  {
-    "topic": "estorno e devolução",
-    "content": "Para fazer um estorno de venda: acesse Vendas > selecione a venda > Estornar. Estornos de débito são feitos em até 24 horas. Estornos de crédito podem levar de 1 a 2 faturas para aparecer no cartão do cliente. Você tem até 180 dias para solicitar o estorno de uma venda. Após o estorno, o valor é descontado do seu saldo disponível ou das próximas vendas. Se o saldo for insuficiente, o estorno fica pendente até haver saldo suficiente."
-  },
-  {
-    "topic": "venda bloqueada para familiar",
-    "content": "O InfinitePay possui regras antifraude que identificam vendas suspeitas, incluindo transações entre pessoas com o mesmo endereço ou relacionamento próximo. Isso é uma medida de segurança para proteger o lojista. Se uma venda legítima foi bloqueada, entre em contato com o suporte via chat explicando o contexto. Em casos recorrentes, pode ser solicitado documentação adicional para liberar esse tipo de transação."
-  },
-  {
-    "topic": "senha e acesso à conta",
-    "content": "Para redefinir a senha: na tela de login, clique em 'Esqueci minha senha' e siga as instruções por SMS ou e-mail. Se não tem acesso ao número/e-mail cadastrado, entre em contato com o suporte com documentação de identidade. Para trocar a senha com acesso ativo: Perfil > Segurança > Alterar senha. Recomendamos ativar autenticação por biometria em Segurança > Biometria para mais praticidade e segurança."
-  },
-  {
-    "topic": "receber dinheiro na hora",
-    "content": "O InfinitePay oferece recebimento em 1 dia útil para vendas no crédito à vista sem custo adicional. Para receber na hora (D+0), acesse Configurações > Recebimento > Receber na hora e habilite a opção — a taxa adicional varia de 1,5% a 3,99% dependendo do volume. Vendas no débito e Pix já caem automaticamente em até 1 hora. O 'InfiniteNitro' é o produto de antecipação automática — pode ser ativado ou desativado a qualquer momento."
-  },
-  {
-    "topic": "suporte e atendimento",
-    "content": "O suporte do InfinitePay está disponível pelo chat dentro do app: acesse Ajuda > Falar com suporte. O horário de atendimento humano é de segunda a sábado das 8h às 20h. Fora desse horário, o atendimento é feito por IA com opção de retorno no próximo dia útil. Tempo médio de resposta: até 2 horas em horário comercial. Para casos urgentes como conta bloqueada com valores retidos, mencione 'urgente' no início da mensagem para priorização."
-  },
-  {
-    "topic": "maquininha física Smart",
-    "content": "A maquininha Smart do InfinitePay aceita débito, crédito e Pix por aproximação. Para configurar: ligue a maquininha, conecte ao Wi-Fi ou use o chip 4G incluso, e faça login com os dados da sua conta InfinitePay. A bateria dura até 8 horas em uso contínuo. Se a maquininha não conecta: 1) Verifique o sinal Wi-Fi; 2) Reinicie a maquininha; 3) Confira se o chip tem crédito ou está ativado. Para problemas de hardware, entre em contato para troca garantida em até 7 dias úteis."
-  },
-  {
-    "topic": "empréstimo InfinitePay",
-    "content": "O InfinitePay oferece empréstimo para lojistas com base no histórico de vendas. Para verificar se você tem oferta disponível: acesse a aba Empréstimo no app. O pagamento é descontado automaticamente das vendas futuras (sem parcela fixa mensal). Taxas a partir de 1,99% ao mês. O valor liberado depende do volume médio de vendas dos últimos 3 meses. Não é necessário consulta ao SPC/Serasa. O dinheiro cai em até 1 hora após aprovação."
+    "topic": "link de pagamento",
+    "content": "Para problemas com link de pagamento: 1) Verifique se o link não expirou (validade de 30 dias); 2) Gere um novo link diretamente no app; 3) Links têm proteção antifraude que pode recusar cartões de familiares — gere um novo link para esses casos. Para clientes que não conseguem pagar sem baixar o app, esta é uma limitação conhecida do produto — use Pix ou gere um QR Code como alternativa."
   },
   {
     "topic": "cancelar conta",
-    "content": "Para cancelar a conta InfinitePay: certifique-se de que não há saldo disponível (transfira ou saque antes), verifique que não há cobranças pendentes, e acesse Perfil > Configurações > Encerrar conta. O processo é irreversível. Se houver mensalidade ativa, ela é cancelada no fim do ciclo atual sem cobrança de multa. Dados são mantidos por 5 anos conforme legislação financeira. Para dúvidas antes de cancelar, fale com o suporte — muitos problemas têm solução sem precisar encerrar a conta."
+    "content": "Para cancelar: certifique-se de que não há saldo (transfira antes), verifique cobranças pendentes, e acesse Perfil > Configurações > Encerrar conta. O processo é irreversível. Mensalidade ativa é cancelada no fim do ciclo sem multa. Dados são mantidos por 5 anos conforme legislação financeira. Antes de cancelar, verifique se o problema pode ser resolvido — muitos usuários cancelam por problemas que têm solução."
   },
   {
-    "topic": "notificações e popups no app",
-    "content": "Se o app exibe muitos popups e notificações indesejadas: acesse Perfil > Notificações e desative as categorias que não quer receber (promoções, novidades, etc.). Algumas notificações de segurança e transações são obrigatórias e não podem ser desativadas. Para desativar notificações push completamente, acesse as Configurações do seu celular > Apps > InfinitePay > Notificações e desative. O GPS solicitado pelo app é necessário para conformidade regulatória em transações financeiras."
+    "topic": "empréstimo InfinitePay",
+    "content": "O InfinitePay oferece empréstimo para lojistas com base no histórico de vendas. Para verificar oferta disponível: acesse a aba Empréstimo no app. Pagamento automático pelas vendas futuras, sem parcela fixa. Taxas a partir de 1,99% ao mês. O valor depende do volume médio dos últimos 3 meses. Não consulta SPC/Serasa. Dinheiro em até 1 hora após aprovação."
   },
   {
-    "topic": "instabilidade e sistema fora do ar",
-    "content": "Para verificar o status atual dos sistemas do InfinitePay, acesse status.infinitepay.io. Em casos de instabilidade: transações que mostram 'processando' por mais de 5 minutos provavelmente não foram cobradas — aguarde antes de tentar novamente para evitar cobrança dupla. O InfinitePay possui SLA de 99,9% de disponibilidade. Incidentes são comunicados pelo app e redes sociais. Se sua venda foi feita durante instabilidade, verifique no extrato em até 30 minutos antes de contatar o suporte."
+    "topic": "sistema fora do ar ou instabilidade geral",
+    "content": "Para verificar o status dos sistemas do InfinitePay, acesse status.infinitepay.io. Em instabilidade: transações com status 'processando' por mais de 5 minutos provavelmente não foram cobradas — aguarde antes de tentar novamente para evitar cobrança dupla. Incidentes são comunicados pelo app e redes sociais. Se fez uma venda durante instabilidade, verifique no extrato em até 30 minutos antes de contatar o suporte."
   }
 ]
